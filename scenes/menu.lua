@@ -39,7 +39,7 @@ function scene:create()
 	cannon.x, cannon.y = tower.x, tower.y - 256
 
 	-- Rotate cannon indefinitely
-	transition.to(cannon, {time = 4000, rotation = -180, alpha = 0, iterations = 0, physics.setVelocityIterations( 16 ), transition = easing.outInBounce})
+	transition.to(cannon, {time = 4000, rotation = 360 , alpha = 0, iterations = 0, physics.setVelocityIterations( 16 ), transition = easing.linear})
 
 	local numTiles = math.ceil(_W / 64 / 2)
 	for i = -numTiles - 7, numTiles + 7 do -- Add extra 4 on the sides for resize events
@@ -81,15 +81,15 @@ function scene:create()
 		defaultFile = 'images/buttons/play.png',
 		overFile = 'images/buttons/play-over.png',
 		width = 380, height = 200,
-		x = 400 - 190, y = -200 - 100,
+		x = 1600 , y = -200 - 100,
 		onRelease = function()
 			sounds.play('tap')
-			composer.gotoScene('scenes.level_select', {time = 500, effect = 'slideRight'})
+			composer.gotoScene('scenes.level_select', {time = 500, effect = 'zoomOutInRotate'})
 		end
 	})
 	group:insert(self.playButton)
 
-	transition.to(self.playButton, {time = 1200, delay = 400, y = _H - 128 - self.playButton.height / 2, transition = easing.inExpo, onComplete = function(object1)
+	transition.to(self.playButton, {time = 1200, delay = 400, y = _H - 128 - self.playButton.height / 2, transition = easing.linear, onComplete = function(object1)
 		transition.to(object1, {time = 1000, x = _W - 64 - self.playButton.width / 2, transition = easing.inOutCirc, onComplete = function(object2)
 			relayout.add(object2)
 		end})
