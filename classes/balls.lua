@@ -24,6 +24,21 @@ function _M.newBall(params)
 		ball.isLaunched = true
 	end
 
+	function ball:split()
+local ball2 = display.newImageRect(params.g, 'images/ammo/' .. params.type .. '.png', 48, 48)
+		if self.type == "split" then
+			ball:addEventListener("tap", split)
+			ball2.x = ball.x
+			ball2.y = ball.y +20
+			ball2.isBullet = true -- More accurate collision detection
+			ball2.angularDamping = 3 -- Prevent the ball from rolling for too long
+			ball2.type = params.type
+			dir = math.rad(dir) -- We need the direction angle in radians for calculations below
+			ball2.bodyType = 'dynamic' -- Change to dynamic so it can move
+			ball2:applyLinearImpulse(force * math.cos(dir), force * math.sin(dir), ball2.x, ball2.y)
+			ball2.isLaunched = true
+
+
 	function ball:explode()
 		sounds.play('explosion')
 		local radius = 300 -- Explosion radius, all objects touching this area will be affected by the explosion

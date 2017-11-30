@@ -75,6 +75,8 @@ function scene:create()
 		character.x, character.y = i * 72, 0
 		transition.from(character, {time = 500, delay = 100 * j, y = _H + 100, transition = easing.outExpo})
 		j = j + 1
+		transition.to(text, {time = 4000, rotation = 360, iterations = 0, physics.setVelocityIterations( 16 ), transition = linear})
+
 	end
 
 	self.playButton = widget.newButton({
@@ -92,6 +94,7 @@ function scene:create()
 	transition.to(self.playButton, {time = 1200, delay = 400, y = _H - 128 - self.playButton.height / 2, transition = easing.linear, onComplete = function(object1)
 		transition.to(object1, {time = 1000, x = _W - 64 - self.playButton.width / 2, transition = easing.inOutCirc, onComplete = function(object2)
 			relayout.add(object2)
+				transition.to(self.playButton, {time = 4000, rotation = 360, iterations = 0, physics.setVelocityIterations( 16 ), transition = linear})
 		end})
 	end})
 
