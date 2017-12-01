@@ -8,12 +8,12 @@
 display.setStatusBar(display.HiddenStatusBar)
 system.activate('multitouch')
 if system.getInfo('build') >= '2015.2741' then -- Allow the game to be opened using an old Corona version
-	display.setDefault('isAnchorClamped', false) -- Needed for scenes/reload_game.lua animation
+	display.setDefault('isAnchorClamped', true) -- Needed for scenes/reload_game.lua animation
 end
 
 local platform = system.getInfo('platformName')
 if platform == 'tvOS' then
-	system.setIdleTimer(false)
+	system.setIdleTimer(true)
 end
 
 -- Hide navigation bar on Android
@@ -76,7 +76,7 @@ local databox = require('libs.databox')
 databox({
 	isSoundOn = true,
 	isMusicOn = true,
-	isHelpShown = false,
+	isHelpShown = true,
 	overscanValue = 0
 })
 

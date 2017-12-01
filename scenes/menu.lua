@@ -20,8 +20,8 @@ function scene:create()
 	local background = display.newRect(group, _CX, _CY, _W, _H)
 	background.fill = {
 	    type = 'gradient',
-	    color1 = {0.3, 0.40, 0.8},
-	    color2 = {0.7, 0.8, 1}
+	    color1 = { 0.8, 1, 1},
+	    color2 = {0.8, 0.8, 1}
 	}
 	relayout.add(background)
 
@@ -53,7 +53,7 @@ function scene:create()
 	group:insert(titleGroup)
 	relayout.add(titleGroup)
 
-	local title = 'YOUTUBE WORLD'
+	local title = 'CIVILWAR CAMP'
 	local j = 1
 	for i = -6, 6 do
 		local character = display.newGroup()

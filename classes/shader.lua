@@ -1,5 +1,5 @@
 -- Cannon ball
--- There are two types of canonn balls: balls and bomb
+-- There are two types of canonn balls: normal and bomb
 
 local physics = require('physics')
 local sounds = require('libs.sounds')
@@ -26,9 +26,9 @@ function _M.newBall(params)
 
 	function ball:explode()
 		sounds.play('explosion')
-		local radius = 400 -- Explosion radius, all objects touching this area will be affected by the explosion
+		local radius = 600 -- Explosion radius, all objects touching this area will be affected by the explosion
 		local area = display.newCircle(params.g, self.x, self.y, radius)
-		area.isVisible = true
+		area.isVisible = false
 		physics.addBody(area, 'dynamic', {isSensor = true, radius = radius})
 
 		-- The trick is to create a large circle, grab all collisions and destroy it
@@ -41,15 +41,15 @@ function _M.newBall(params)
 					local dir = math.atan2(y, x) * 180 / math.pi
 					local force = (radius - math.sqrt(x ^ 2 + y ^ 2)) * 4 -- Reduce the force with the distance from the explosion
 					-- If an object touches the explosion, the force will be at least this big
-					if force < 80 then
-						force = 80
+					if force < 60 then
+						force = 60
 					end
 					event.other:applyLinearImpulse(force * math.cos(dir), force * math.sin(dir), event.other.x, event.other.y)
 				end
 			end
 		end
 		area:addEventListener('collision')
-		timer.performWithDelay(2, function()
+		timer.performWithDelay(1, function()
 			area:removeSelf()
 		end)
 
@@ -58,8 +58,8 @@ function _M.newBall(params)
 
 	function ball:destroy()
 		-- The ball can either be destroyed as a normal one or as bomb with an explosions
-		newPuff({g = params.g, x = self.x, y = self.y, isExplosion = self.type == 'balls'})
-		if self.type == 'balls' then
+		newPuff({g = params.g, x = self.x, y = self.y, isExplosion = self.type == 'shader'})
+		if self.type == 'shader' then
 			self:explode()
 		else
 			sounds.play('ball_destroy')

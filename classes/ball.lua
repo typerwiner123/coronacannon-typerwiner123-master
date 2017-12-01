@@ -26,9 +26,9 @@ function _M.newBall(params)
 
 	function ball:explode()
 		sounds.play('explosion')
-		local radius = 300 -- Explosion radius, all objects touching this area will be affected by the explosion
+		local radius = 600 -- Explosion radius, all objects touching this area will be affected by the explosion
 		local area = display.newCircle(params.g, self.x, self.y, radius)
-		area.isVisible = true
+		area.isVisible = false
 		physics.addBody(area, 'dynamic', {isSensor = true, radius = radius})
 
 		-- The trick is to create a large circle, grab all collisions and destroy it
@@ -41,8 +41,8 @@ function _M.newBall(params)
 					local dir = math.atan2(y, x) * 180 / math.pi
 					local force = (radius - math.sqrt(x ^ 2 + y ^ 2)) * 4 -- Reduce the force with the distance from the explosion
 					-- If an object touches the explosion, the force will be at least this big
-					if force < 20 then
-						force = 20
+					if force < 80 then
+						force = 80
 					end
 					event.other:applyLinearImpulse(force * math.cos(dir), force * math.sin(dir), event.other.x, event.other.y)
 				end
@@ -59,7 +59,7 @@ function _M.newBall(params)
 	function ball:destroy()
 		-- The ball can either be destroyed as a normal one or as bomb with an explosions
 		newPuff({g = params.g, x = self.x, y = self.y, isExplosion = self.type == 'bomb'})
-		if self.type == 'bomb' then
+		if self.type == 'bomb' or self.type == 'balls' then
 			self:explode()
 		else
 			sounds.play('ball_destroy')
