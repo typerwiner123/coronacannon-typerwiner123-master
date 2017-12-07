@@ -63,6 +63,8 @@ return {
 		{material = 'stone', name = 'rectangle1', x = 2974, y = 46, rotation = 0},
 		{material = 'stone', name = 'rectangle1', x = 2897, y = 46, rotation = 0},
 		{material = 'wood', name = 'rectangle1', x = 2897, y = 10, rotation = 0},
+		{material = 'wood', name = 'rectangle1', x = 2897, y = 10, rotation = 0},
+		{material = 'wood', name = 'rectangle1', x = 2897, y = 10, rotation = 0},
 		{material = 'stone', name = 'rectangle1', x = 2859, y = -65, rotation = 0},
 		{material = 'stone', name = 'rectangle1', x = 2897, y = -61, rotation = 0},
 		{material = 'stone', name = 'rectangle1', x = 2934, y = -61, rotation = 0},

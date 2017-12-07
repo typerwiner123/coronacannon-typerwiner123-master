@@ -1,7 +1,7 @@
 return {
 	map = 2,
 	cannon = {mapX = 6, mapY = 4},
-	ammo = {'normal', 'normal', 'normal', 'normal', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb'},
+	ammo = {'normal', 'normal', 'normal', 'bomb', 'bomb'},
 	bugs = {
 		{x = 1596, y = 230},
 		{x = 2302, y = 166},

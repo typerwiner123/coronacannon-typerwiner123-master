@@ -41,7 +41,8 @@ end
 
 local composer = require('composer')
 composer.recycleOnSceneChange = true -- Automatically remove scenes from memory
-composer.setVariable('levelCount', 15) -- Set how many levels there are under levels/ directory
+composer.setVariable('levelCount', 
+15) -- Set how many levels there are under levels/ directory
 
 -- Add support for back button on Android and Window Phone
 -- When it's pressed, check if current scene has a special field gotoPreviousScene

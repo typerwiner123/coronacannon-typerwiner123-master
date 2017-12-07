@@ -14,14 +14,14 @@ function scene:create()
     local background = display.newRect(group, _CX, _CY, _W, _H)
     background.fill = {
         type = 'gradient',
-        color1 = {0.2, 0.45, 0.8},
-        color2 = {0.35, 0.4, 0.5}
+        color1 = {0.5, 0.9, 0.5},
+        color2 = {0.8, 1, 1}
     }
     relayout.add(background)
 
     local label = display.newText({
 		parent = group,
-		text = 'LOADING...',
+		text = 'PLEASE WAIT...',
 		x = _W - 32, y = _H - 32,
 		font = native.systemFontBold,
 		fontSize = 32

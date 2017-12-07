@@ -20,7 +20,7 @@ function scene:create()
 	local background = display.newRect(group, _CX, _CY, _W, _H)
 	background.fill = {
 	    type = 'gradient',
-	    color1 = { 0.8, 1, 1},
+	    color1 = { 0.6, 0.9, 0.9},
 	    color2 = {0.8, 0.8, 1}
 	}
 	relayout.add(background)
@@ -53,15 +53,15 @@ function scene:create()
 	group:insert(titleGroup)
 	relayout.add(titleGroup)
 
-	local title = 'CIVILWAR CAMP'
+	local title = 'CHRISTMAS YEAR'
 	local j = 1
-	for i = -6, 6 do
+	for i = -6, 7 do
 		local character = display.newGroup()
 		titleGroup:insert(character)
 		local rect = display.newRect(character, 0, 0, 64, 64)
 		rect.strokeWidth = 5
-		rect:setFillColor(0.1)
-		rect:setStrokeColor(0.4)
+		rect:setFillColor(0.2, 0.6, 0.3)
+		rect:setStrokeColor(0.10)
 
 		local text = display.newText({
 			parent = character,
@@ -70,7 +70,9 @@ function scene:create()
 			font = native.systemFontBold,
 			fontSize = 64
 		})
-		text:setFillColor(0.8, 0.5, 0.2)
+		text:setFillColor(0, 0.7, 1)
+		text:setFillColor(0.2, 0.8, 0.6)
+		text:setFillColor(0.4, 0.8, 0.7)
 
 		character.x, character.y = i * 72, 0
 		transition.from(character, {time = 500, delay = 100 * j, y = _H + 100, transition = easing.outExpo})
@@ -91,10 +93,10 @@ function scene:create()
 	})
 	group:insert(self.playButton)
 
-	transition.to(self.playButton, {time = 1200, delay = 400, y = _H - 128 - self.playButton.height / 2, transition = easing.linear, onComplete = function(object1)
-		transition.to(object1, {time = 1000, x = _W - 64 - self.playButton.width / 2, transition = easing.inOutCirc, onComplete = function(object2)
+	transition.to(self.playButton, {time = 1200, delay = 400, y = _H - 128 - self.playButton.height / 2, transition = easing.outInQuart, onComplete = function(object1)
+		transition.to(object1, {time = 1000, x = _W - 64 - self.playButton.width / 2, transition = easing.outInQuart, onComplete = function(object2)
 			relayout.add(object2)
-				transition.to(self.playButton, {time = 4000, rotation = 360, iterations = 0, physics.setVelocityIterations( 16 ), transition = linear})
+				transition.to(self.playButton, {time = 4200, rotation = 360, iterations = 0, physics.setVelocityIterations( 16 ), transition = linear})
 		end})
 	end})
 

@@ -1,6 +1,10 @@
 -- Level Selection Scene
 -- Displays a button for each level. There is a space for extra buttons, add your own levels!
 
+local function gotomenu()
+  composer.gotoScene( "menu", { time=800, effect="slideRight" } )
+end
+
 local composer = require('composer')
 local widget = require('widget')
 local controller = require('libs.controller')
@@ -18,8 +22,8 @@ function scene:create()
 	local background = display.newRect(group, _CX, _CY, _W, _H)
 	background.fill = {
 	    type = 'gradient',
-	    color1 = {0.8, 0.45, 0.2},
-	    color2 = {1, 0.8, 0.7}
+	    color1 = {0.8, 0.45, 0.4},
+	    color2 = {1, 0.12, 0.10}
 	}
 	relayout.add(background)
 
