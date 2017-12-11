@@ -1,10 +1,6 @@
 -- Level Selection Scene
 -- Displays a button for each level. There is a space for extra buttons, add your own levels!
 
-local function gotomenu()
-  composer.gotoScene( "menu", { time=800, effect="slideRight" } )
-end
-
 local composer = require('composer')
 local widget = require('widget')
 local controller = require('libs.controller')

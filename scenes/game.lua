@@ -36,8 +36,8 @@ function scene:create(event)
 	local background = display.newRect(group, _CX, _CY, _W,  _H)
 	background.fill = {
 	    type = 'gradient',
-	    color1 = {0.7, 0.8, 1},
-	    color2 = {1, 1, 0.9}
+	    color1 = {1, 1, 0.9},
+	    color2 = {0.7, 0.8, 1}
 	}
 	relayout.add(background)
 
@@ -86,9 +86,8 @@ function scene:create(event)
 		x = _W - 16, y = 16,
 		font = native.systemFontBold,
 		fontSize = 32
-
 	})
-	levelLabel:setFillColor(red)
+	levelLabel:setFillColor( 0.2, 0.1, 0.7 )
 	levelLabel.anchorX, levelLabel.anchorY = 1, 0
 	relayout.add(levelLabel)
 
