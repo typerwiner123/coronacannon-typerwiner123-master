@@ -69,9 +69,11 @@ function _M.newCannon(params)
 	-- Move next available cannon ball into the cannon
 	function cannon:load()
 		if #balls > 0 then
-			cannon:prepareAmmo()
 			self.ball = table.remove(balls, #balls)
 			transition.to(self.ball, {time = 500, x = self.x, y = self.y, transition = easing.outExpo})
+		else
+			self:prepareAmmo()
+			self:load()
 		end
 	end
 
