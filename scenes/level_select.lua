@@ -15,12 +15,16 @@ function scene:create()
 
 	local group = self.view
 
-	local background = display.newRect(group, _CX, _CY, _W, _H)
-	background.fill = {
-	    type = 'gradient',
-	    color1 = {0.8, 0.45, 0.4},
-	    color2 = {1, 0.12, 0.10}
-	}
+	local background = display.newImage( group, 'images/background/reload.png', _W, _H)
+	background.x=display.contentCenterX
+	background.y=display.contentCenterY
+
+	--local background = display.newRect(group, _CX, _CY, _W, _H)
+	--background.fill = {
+	    --type = 'gradient',
+	   -- color1 = {0.8, 0.45, 0.4},
+	    --color2 = {1, 0.12, 0.10}
+	--}
 	relayout.add(background)
 
 	local visualButtons = {}

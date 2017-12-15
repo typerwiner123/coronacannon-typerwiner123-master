@@ -88,6 +88,7 @@ function scene:create()
 			composer.gotoScene('scenes.level_select', {time = 500, effect = 'zoomOutInRotate'})
 		end
 	})
+
 	group:insert(self.playButton)
 
 	transition.to(self.playButton, {time = 1200, delay = 400, y = _H - 128 - self.playButton.height / 2, transition = easing.outInQuart, onComplete = function(object1)

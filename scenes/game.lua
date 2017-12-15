@@ -33,10 +33,10 @@ function scene:create(event)
 	local group = self.view
 	self.levelId = event.params
 	self.level = require('levels.' .. self.levelId)
-	local background = display.newImage( group, 'images/background/christmas.png', _W, _H)
+	local background = display.newImage( group, 'images/background/Desktop.png', _W, _H)
 	background.x=display.contentCenterX
 	background.y=display.contentCenterY
-	
+
 	relayout.add(background)
 
 	-- The central element - Tiled map

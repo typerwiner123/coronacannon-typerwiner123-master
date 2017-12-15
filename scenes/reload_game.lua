@@ -11,12 +11,16 @@ function scene:create()
 
     local group = self.view
 
-    local background = display.newRect(group, _CX, _CY, _W, _H)
-    background.fill = {
-        type = 'gradient',
-        color1 = {0.5, 0.9, 0.5},
-        color2 = {0.8, 1, 1}
-    }
+    local background = display.newImage( group, 'images/background/nope.png', _W, _H)
+  	background.x=display.contentCenterX
+  	background.y=display.contentCenterY
+
+    --local background = display.newRect(group, _CX, _CY, _W, _H)
+    --background.fill = {
+        --type = 'gradient',you
+        --color1 = {0.5, 0.9, 0.5},
+        --color2 = {0.8, 1, 1}
+    --}
     relayout.add(background)
 
     local label = display.newText({

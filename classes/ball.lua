@@ -12,7 +12,7 @@ function _M.newBall(params)
 	local ball = display.newImageRect(params.g, 'images/ammo/' .. params.type .. '.png', 48, 48)
 	ball.x, ball.y = params.x, params.y
 	-- While the ball rests near the cannon, it's static
-	physics.addBody(ball, 'static', {density = 2, friction = 0.5, bounce = 0.5, radius = ball.width / 2})
+	physics.addBody(ball, 'static', {density = 80, friction = 100, bounce = 0.5, radius = ball.width / 2})
 	ball.isBullet = true -- More accurate collision detection
 	ball.angularDamping = 3 -- Prevent the ball from rolling for too long
 	ball.type = params.type
