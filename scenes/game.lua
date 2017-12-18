@@ -78,6 +78,16 @@ function scene:create(event)
 		controller.setVisualButtons()
 	end})
 
+	local playButton = widget.newButton({
+		defaultFile = 'images/buttons/cheat.png',
+		overFile = 'images/buttons/cheat-over.png',
+		width = 96, height = 105,
+		x = 16, y = 16,
+		onRelease = function()
+			sounds.play('tap')
+			physics.start()
+end
+})
 	local levelLabel = display.newText({
 		parent = group,
 		text = 'Level: ' .. self.levelId,

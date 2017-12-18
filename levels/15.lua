@@ -1,7 +1,7 @@
 return {
 	map = 2,
 	cannon = {mapX = 6, mapY = 4},
-	ammo = {'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb','bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb','bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb','bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb','bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb','bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb','bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb','bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb', 'bomb'},
+	ammo = {'bomb', 'bomb', 'bomb', "balls"},
 	bugs = {
 		{x = 1596, y = 230},
 		{x = 2302, y = 166},
@@ -76,7 +76,7 @@ return {
 		{x = 5481, y = 240},
 		{x = 1813, y = 240},
 		{x = 1600, y = 358},
-		
+
 	},
 	blocks = {
 		{material = 'stone', name = 'rectangle5', x = 1758, y = -80, rotation = 0},
