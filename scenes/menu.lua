@@ -96,6 +96,24 @@ function scene:create()
 		end})
 	end})
 
+	local playButton = widget.newButton({
+		defaultFile = 'images/buttons/secret.png',
+		overFile = 'images/buttons/secret-over.png',
+		width = 105, height = 105,
+		x = 50, y = 50,
+		onRelease = function()
+		composer.gotoScene('scenes.Hacked_level_select', {time = 500, effect = 'fade'})
+		sounds.play('tap')
+end
+})
+
+	group:insert(playButton)
+
+	transition.to(playButton, {time = 1200, delay = 400, y = 400 - playButton.height / 2, transition = easing.outBounce, onComplete = function(object1)
+		transition.to(object1, {time = 1000, x = 170 - playButton.width / 2, transition = easing.outBounce, onComplete = function(object2)
+		end})
+	end})
+
 	local sidebar = newSidebar({g = group, onHide = function()
 		self:setVisualButtons()
 	end})

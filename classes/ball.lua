@@ -12,7 +12,7 @@ function _M.newBall(params)
 	local ball = display.newImageRect(params.g, 'images/ammo/' .. params.type .. '.png', 48, 48)
 	ball.x, ball.y = params.x, params.y
 	-- While the ball rests near the cannon, it's static
-	physics.addBody(ball, 'static', {density = 200, friction = 0.5, bounce = 0, radius = ball.width / 2})
+	physics.addBody(ball, 'static', {density = 0.5, friction = 0.5, bounce = 0.5, radius = ball.width / 2})
 	ball.isBullet = true -- More accurate collision detection
 	ball.angularDamping = 3 -- Prevent the ball from rolling for too long
 	ball.type = params.type
@@ -20,7 +20,6 @@ function _M.newBall(params)
 	function ball:launch(dir, force)
 		dir = math.rad(dir) -- We need the direction angle in radians for calculations below
 		ball.bodyType = 'dynamic' -- Change to dynamic so it can move
-		force = force*100
 		ball:applyLinearImpulse(force * math.cos(dir), force * math.sin(dir), ball.x, ball.y)
 		ball.isLaunched = true
 	end
@@ -60,7 +59,7 @@ function _M.newBall(params)
 	function ball:destroy()
 		-- The ball can either be destroyed as a normal one or as bomb with an explosions
 		newPuff({g = params.g, x = self.x, y = self.y, isExplosion = self.type == 'bomb'})
-		if self.type == 'balls' or self.type == 'balls' then
+		if self.type == 'bomb' or self.type == 'balls' then
 			self:explode()
 		else
 			sounds.play('ball_destroy')

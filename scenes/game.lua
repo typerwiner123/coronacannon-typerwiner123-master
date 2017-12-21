@@ -82,10 +82,10 @@ function scene:create(event)
 		defaultFile = 'images/buttons/cheat.png',
 		overFile = 'images/buttons/cheat-over.png',
 		width = 96, height = 105,
-		x = 16, y = 16,
+		x = 1100, y = 550,
 		onRelease = function()
-			sounds.play('tap')
-			physics.start()
+		sounds.play('tap')
+	  physics:addBody(force, 'static')
 end
 })
 	local levelLabel = display.newText({
