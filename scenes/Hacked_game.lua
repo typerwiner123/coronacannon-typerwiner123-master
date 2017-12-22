@@ -30,15 +30,13 @@ local newEndLevelPopup = require('classes.end_level_popup').newEndLevelPopup -- 
 function scene:create(event)
 	local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
 
-	local group = self.view
+	local Hacked_group = self.view
 	self.levelId = event.params
 	self.level = require('levels.' .. self.levelId)
-	local background = display.newRect(group, _CX, _CY, _W,  _H)
-	background.fill = {
-	    type = 'gradient',
-	    color1 = {1, 1, 0.9},
-	    color2 = {0.7, 0.8, 1}
-	}
+	local Hacked_background = display.newImage( group, 'images/background/meme.png', _W, _H)
+	Hacked_background.x=display.contentCenterX
+	Hacked_background.y=display.contentCenterY
+
 	relayout.add(background)
 
 	-- The central element - Tiled map

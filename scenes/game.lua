@@ -81,13 +81,16 @@ function scene:create(event)
 	local playButton = widget.newButton({
 		defaultFile = 'images/buttons/cheat.png',
 		overFile = 'images/buttons/cheat-over.png',
-		width = 96, height = 105,
-		x = 1100, y = 550,
+		width = 100, height = 105,
+		x = 1100, y = 590,
 		onRelease = function()
 		sounds.play('tap')
-	  physics:addBody(force, 'static')
+		physics = require( "physics" )
+		physics.start()
+		physics.setGravity( 0, 0 )
 end
 })
+
 	local levelLabel = display.newText({
 		parent = group,
 		text = 'Level: ' .. self.levelId,
