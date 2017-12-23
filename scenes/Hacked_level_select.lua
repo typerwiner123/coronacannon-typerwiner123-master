@@ -15,7 +15,7 @@ function scene:create()
 
 	local group = self.view
 
-	local background = display.newImage( group, 'images/background/cheater.png', _W, _H)
+	local background = display.newImage( group, 'images/background/hacked_level.png', _W, _H)
 	background.x=display.contentCenterX
 	background.y=display.contentCenterY
 
@@ -44,8 +44,8 @@ function scene:create()
 			font = native.systemFontBold,
 			fontSize = 100,
 			labelYOffset = -10,
-			defaultFile = 'images/buttons/level.png',
-			overFile = 'images/buttons/level-over.png',
+			defaultFile = 'images/buttons/levels.png',
+			overFile = 'images/buttons/levels-over.png',
 			width = 160, height = 175,
 			x = x * spacing, y = 32 + y * spacing + 87,
 			onRelease = onLevelButtonRelease
@@ -69,7 +69,7 @@ function scene:create()
 	end
 	controller.setVisualButtons(visualButtons)
 
-	self.gotoPreviousScene = 'scenes.menu' -- Allow going back on back button press
+	self.gotoPreviousScene = 'scenes.Hacked_menu' -- Allow going back on back button press
 end
 
 scene:addEventListener('create')

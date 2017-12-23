@@ -7,7 +7,7 @@
 
 display.setStatusBar(display.HiddenStatusBar)
 system.activate('multitouch')
-if system.getInfo('build') >= '2015.2741' then -- Allow the game to be opened using an old Corona version
+if system.getInfo('build') >= '2017.2741' then -- Allow the game to be opened using an old Corona version
 	display.setDefault('isAnchorClamped', true) -- Needed for scenes/reload_game.lua animation
 end
 
@@ -41,8 +41,7 @@ end
 
 local composer = require('composer')
 composer.recycleOnSceneChange = true -- Automatically remove scenes from memory
-composer.setVariable('levelCount', 
-15) -- Set how many levels there are under levels/ directory
+composer.setVariable('levelCount', 15) -- Set how many levels there are under levels/ directory
 
 -- Add support for back button on Android and Window Phone
 -- When it's pressed, check if current scene has a special field gotoPreviousScene

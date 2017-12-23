@@ -11,7 +11,7 @@ function scene:create()
 
     local group = self.view
 
-    local background = display.newImage( group, 'images/background/beautiful.png', _W, _H)
+    local background = display.newImage( group, 'images/background/YES.png', _W, _H)
   	background.x=display.contentCenterX
   	background.y=display.contentCenterY
 
@@ -19,7 +19,7 @@ function scene:create()
 
     local label = display.newText({
 		parent = group,
-		text = 'PLEASE WAIT...',
+		text = 'BUILDING ...',
 		x = _W - 32, y = _H - 32,
 		font = native.systemFontBold,
 		fontSize = 32
@@ -45,11 +45,11 @@ end
 function scene:show(event)
     if event.phase == 'will' then
         -- Preload the scene
-        composer.loadScene('scenes.game', {params = event.params})
+        composer.loadScene('scenes.Hacked_game', {params = event.params})
     elseif event.phase == 'did' then
         -- Show it after a moment
         timer.performWithDelay(500, function()
-            composer.gotoScene('scenes.game', {params = event.params})
+            composer.gotoScene('scenes.Hacked_game', {params = event.params})
         end)
     end
 end

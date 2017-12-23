@@ -71,9 +71,6 @@ function _M.newCannon(params)
 		if #balls > 0 then
 			self.ball = table.remove(balls, #balls)
 			transition.to(self.ball, {time = 500, x = self.x, y = self.y, transition = easing.outExpo})
-		else
-			self:prepareAmmo()
-			self:load()
 		end
 	end
 

@@ -7,19 +7,19 @@ local sounds = require('libs.sounds')
 
 local _M = {}
 
-local newHacked_Ball = require('classes.ball').newHacked_Ball
+local newBall = require('classes.ball').newBall
 local newPuff = require('classes.puff').newPuff
 
 function _M.newHacked_Cannon(params)
 	local map = params.map
 	local level = params.level
 	-- Tower and cannon images are aligned to the level's grid, hence the mapX and mapY
-	local tower = display.newImageRect(map.group, 'images/tower.png', 192, 256)
+	local tower = display.newImageRect(map.group, 'images/towers.png', 192, 256)
 	tower.anchorY = 1
 	tower.x, tower.y = map:mapXYToPixels(level.Hacked_cannon.mapX + 0.5, level.Hacked_cannon.mapY + 1)
 	map.snapshot:invalidate()
 
-	local Hacked_cannon = display.newImageRect(map.physicsGroup, 'images/cannon.png', 128, 64)
+	local Hacked_cannon = display.newImageRect(map.physicsGroup, 'images/shoot.png', 128, 64)
 	Hacked_cannon.anchorX = 0.25
 	Hacked_cannon.x, Hacked_cannon.y = map:mapXYToPixels(level.Hacked_cannon.mapX + 0.5, level.Hacked_cannon.mapY - 3)
 
@@ -46,10 +46,10 @@ function _M.newHacked_Cannon(params)
 	touchArea:addEventListener('touch', Hacked_cannon)
 
 	local trajectoryPoints = {} -- White dots along the flying path of a ball
-	local Hacked_balls = {} -- Container for the ammo
+	local balls = {} -- Container for the ammo
 
 	function Hacked_cannon:getAmmoCount()
-		return #Hacked_balls + (self.Hacked_ball and 1 or 0)
+		return #balls + (self.ball and 1 or 0)
 	end
 
 	-- Create and stack all available cannon balls near the tower
@@ -57,8 +57,8 @@ function _M.newHacked_Cannon(params)
 		local mapX, mapY = level.Hacked_cannon.mapX - 1, level.Hacked_cannon.mapY
 		for i = #level.ammo, 1, -1 do
 			local x, y = map:mapXYToPixels(mapX + 0.5, mapY + 0.5)
-			local Hacked_ball = newHacked_Ball({g = self.parent, type = level.ammo[i], x = x, y = y})
-			table.insert(Hacked_balls, Hacked_ball)
+			local ball = newBall({g = self.parent, type = level.ammo[i], x = x, y = y})
+			table.insert(balls, ball)
 			mapX = mapX - 1
 			if (#level.ammo - i + 1) % 3 == 0 then
 				mapX, mapY = level.Hacked_cannon.mapX - 1, mapY - 1
@@ -68,9 +68,9 @@ function _M.newHacked_Cannon(params)
 
 	-- Move next available cannon ball into the cannon
 	function Hacked_cannon:load()
-		if #Hacked_balls > 0 then
-			self.Hacked_ball = table.remove(Hacked_balls, #Hacked_balls)
-			transition.to(self.Hacked_ball, {time = 500, x = self.x, y = self.y, transition = easing.outExpo})
+		if #balls > 0 then
+			self.ball = table.remove(balls, #balls)
+			transition.to(self.ball, {time = 500, x = self.x, y = self.y, transition = easing.outExpo})
 		else
 			self:prepareAmmo()
 			self:load()
@@ -79,13 +79,13 @@ function _M.newHacked_Cannon(params)
 
 	-- Launch loaded cannon ball
 	function Hacked_cannon:fire()
-		if self.Hacked_ball and not self.Hacked_ball.isLaunched then
-			self.Hacked_ball:launch(self.rotation, self.force)
+		if self.ball and not self.ball.isLaunched then
+			self.ball:launch(self.rotation, self.force)
 			self:removeTrajectoryPoints()
 			self.launchTime = system.getTimer() -- This time value is needed for the trajectory points
 			self.lastTrajectoryPointTime = self.launchTime
 			newPuff({g = self.parent, x = self.x, y = self.y, isExplosion = true}) -- Display an explosion visual effect
-			map:snapCameraTo(self.Hacked_ball)
+			map:snapCameraTo(self.ball)
 			sounds.play('cannon')
 		end
 	end
@@ -101,7 +101,7 @@ function _M.newHacked_Cannon(params)
 			self.force = 0
 		end
 		-- Only show the force indication if there is a loaded cannon ball
-		if self.Hacked_ball and not self.Hacked_ball.isLaunched then
+		if self.ball and not self.ball.isLaunched then
 			forceArea.isVisible = true
 			forceArea.xScale = 2 * radius / forceArea.width
 			forceArea.yScale = forceArea.xScale
@@ -145,7 +145,7 @@ function _M.newHacked_Cannon(params)
 		-- Draw them for no longer than the first value and each second value millisecods
 		if now - self.launchTime < 1000 and now - self.lastTrajectoryPointTime > 85 then
 			self.lastTrajectoryPointTime = now
-			local point = display.newCircle(self.parent, self.Hacked_ball.x, self.Hacked_ball.y, 2)
+			local point = display.newCircle(self.parent, self.ball.x, self.ball.y, 2)
 			table.insert(trajectoryPoints, point)
 		end
 	end
@@ -162,15 +162,15 @@ function _M.newHacked_Cannon(params)
 	function Hacked_cannon:eachFrame()
 		local step = 2
 	    local damping = 0.99
-		if self.Hacked_ball then
-			if self.Hacked_ball.isLaunched then
+		if self.ball then
+			if self.ball.isLaunched then
 				local vx, vy = self.ball:getLinearVelocity()
 				if vx ^ 2 + vy ^ 2 < 4 or
-					self.Hacked_ball.x < 0 or
-						self.Hacked_ball.x > map.map.tilewidth * map.map.width or
-							self.Hacked_ball.y > map.map.tilewidth * map.map.height then
-					self.Hacked_ball:destroy()
-					self.Hacked_ball = nil
+					self.ball.x < 0 or
+						self.ball.x > map.map.tilewidth * map.map.width or
+							self.ball.y > map.map.tilewidth * map.map.height then
+					self.ball:destroy()
+					self.ball = nil
 					self:load()
 					map:moveCameraSmoothly({x = self.x - relayout._CX, y = self.y - relayout._CY, time = 1000, delay = 500})
 				elseif not self.isPaused then

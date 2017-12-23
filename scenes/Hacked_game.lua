@@ -21,7 +21,7 @@ local scene = composer.newScene()
 -- Uncomment to enable level editing features
 --require('classes.level_editor').enableLevelEditor(scene)
 
-local newCannon = require('classes.cannon').newCannon -- The ultimate weapon
+local newHacked_Cannon = require('classes.Hacked_cannon').newHacked_Cannon -- The ultimate weapon
 local newBug = require('classes.bug').newBug -- Enemies to kill, debug powers
 local newBlock = require('classes.block').newBlock -- Building blocks for the levels
 local newSidebar = require('classes.sidebar').newSidebar -- Settings and pause sidebar
@@ -30,12 +30,12 @@ local newEndLevelPopup = require('classes.end_level_popup').newEndLevelPopup -- 
 function scene:create(event)
 	local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
 
-	local Hacked_group = self.view
+	local group = self.view
 	self.levelId = event.params
-	self.level = require('levels.' .. self.levelId)
-	local Hacked_background = display.newImage( group, 'images/background/meme.png', _W, _H)
-	Hacked_background.x=display.contentCenterX
-	Hacked_background.y=display.contentCenterY
+	self.level = require('levels...Hacked_' .. self.levelId)
+	local background = display.newImage( group, 'images/background/meme.png', _W, _H)
+	background.x=display.contentCenterX
+	background.y=display.contentCenterY
 
 	relayout.add(background)
 
@@ -68,7 +68,7 @@ function scene:create(event)
 	-- Handle touch events, wait a little for camera to slide
 	self:createTouchRect({delay = 2000})
 	self.map.physicsGroup:toFront() -- Put cannon in front of the touchRect
-	self.cannon = newCannon({map = self.map, level = self.level})
+	self.cannon = newHacked_Cannon({map = self.map, level = self.level})
 	self.map:moveCameraSmoothly({x = self.cannon.x - _CX, y = 0, time = 1000, delay = 1000}) -- Slide it back to the cannon
 
 	-- Preload End Level Popup and Sidebar
@@ -77,6 +77,19 @@ function scene:create(event)
 		self:setIsPaused(false)
 		controller.setVisualButtons()
 	end})
+
+	local playButton = widget.newButton({
+		defaultFile = 'images/buttons/cheat.png',
+		overFile = 'images/buttons/cheat-over.png',
+		width = 100, height = 105,
+		x = 1100, y = 590,
+		onRelease = function()
+		sounds.play('tap')
+		physics = require( "physics" )
+		physics.start()
+		physics.setGravity( 0, 0 )
+end
+})
 
 	local levelLabel = display.newText({
 		parent = group,
@@ -266,7 +279,7 @@ end
 function scene:gotoPreviousScene()
 	native.showAlert('Corona Cannon', 'Are you sure you want to exit this level?', {'Yes', 'Cancel'}, function(event)
 		if event.action == 'clicked' and event.index == 1 then
-			composer.gotoScene('scenes.menu', {time = 500, effect = 'slideRight'})
+			composer.gotoScene('scenes.Hacked_menu', {time = 500, effect = 'slideRight'})
 		end
 	end)
 end

@@ -10,7 +10,7 @@ return {
 		{x = math.random(1300), y = 2392},
 		{x = math.random(1300), y = 2392},
 		{x = math.random(1300), y = 2392},
-        {x = math.random(1300), y = 2392},
+    {x = math.random(1300), y = 2392},
 		{x = math.random(1300), y = 2392},
 		{x = math.random(1300), y = 2392},
 		{x = math.random(1300), y = 2342},

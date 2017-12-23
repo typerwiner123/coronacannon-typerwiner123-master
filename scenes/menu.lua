@@ -102,7 +102,7 @@ function scene:create()
 		width = 105, height = 105,
 		x = 50, y = 50,
 		onRelease = function()
-		composer.gotoScene('scenes.Hacked_level_select', {time = 500, effect = 'fade'})
+		composer.gotoScene('scenes.Hacked_menu', {time = 500, effect = 'fade'})
 		sounds.play('tap')
 end
 })
