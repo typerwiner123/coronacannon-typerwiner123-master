@@ -34,11 +34,11 @@ function scene:create()
 
     -- Display three revolving cannon balls
     for i = 0, 2 do
-        local ball = display.newImageRect(ballsGroup, 'images/ammo/normal.png', 64, 64)
-        ball.x, ball.y = 0, 0
-        ball.anchorX = -0.5
-        ball.rotation = 120 * i
-        transition.to(ball, {time = 1500, rotation = 360, delta = true, iterations = -1})
+        local Hacked_ball = display.newImageRect(ballsGroup, 'images/ammo/normal.png', 64, 64)
+        Hacked_ball.x, Hacked_ball.y = 0, 0
+        Hacked_ball.anchorX = -0.5
+        Hacked_ball.rotation = 120 * i
+        transition.to(Hacked_ball, {time = 1500, rotation = 360, delta = true, iterations = -1})
     end
 end
 

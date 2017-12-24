@@ -25,7 +25,7 @@ local newHacked_Cannon = require('classes.Hacked_cannon').newHacked_Cannon -- Th
 local newBug = require('classes.bug').newBug -- Enemies to kill, debug powers
 local newBlock = require('classes.block').newBlock -- Building blocks for the levels
 local newSidebar = require('classes.sidebar').newSidebar -- Settings and pause sidebar
-local newEndLevelPopup = require('classes.end_level_popup').newEndLevelPopup -- Win/Lose dialog windows
+local newHacked_EndLevelPopup = require('classes.Hacked_end_level_popup').newHacked_EndLevelPopup -- Win/Lose dialog windows
 
 function scene:create(event)
 	local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
@@ -68,11 +68,11 @@ function scene:create(event)
 	-- Handle touch events, wait a little for camera to slide
 	self:createTouchRect({delay = 2000})
 	self.map.physicsGroup:toFront() -- Put cannon in front of the touchRect
-	self.cannon = newHacked_Cannon({map = self.map, level = self.level})
-	self.map:moveCameraSmoothly({x = self.cannon.x - _CX, y = 0, time = 1000, delay = 1000}) -- Slide it back to the cannon
+	self.Hacked_cannon = newHacked_Cannon({map = self.map, level = self.level})
+	self.map:moveCameraSmoothly({x = self.Hacked_cannon.x - _CX, y = 0, time = 1000, delay = 1000}) -- Slide it back to the cannon
 
 	-- Preload End Level Popup and Sidebar
-	self.endLevelPopup = newEndLevelPopup({g = group, levelId = self.levelId})
+	self.Hacked_endLevelPopup = newHacked_EndLevelPopup({g = group, levelId = self.levelId})
 	self.sidebar = newSidebar({g = group, levelId = self.levelId, onHide = function()
 		self:setIsPaused(false)
 		controller.setVisualButtons()
@@ -139,14 +139,14 @@ end
 	-- Cannon control on gamepad right stick
 	controller.onRotation = function(name, value)
 		if not self.isPaused then
-			if self.cannon.ball and not self.cannon.ball.isLaunched then
-				self.map:snapCameraTo(self.cannon)
+			if self.Hacked_cannon.Hacked_ball and not self.Hacked_cannon.Hacked_ball.isLaunched then
+				self.map:snapCameraTo(self.Hacked_cannon)
 			end
 			if math.abs(value) >= 0.08 or math.abs(value) < 0.02 then
 				if name == 'x' then
-					self.cannon.radiusIncrement = -value -- Invert x axis to resemble a slingshot
+					self.Hacked_cannon.radiusIncrement = -value -- Invert x axis to resemble a slingshot
 				elseif name == 'y' then
-					self.cannon.rotationIncrement = value
+					self.Hacked_cannon.rotationIncrement = value
 				end
 			end
 		end
@@ -158,7 +158,7 @@ end
 				if keyName == 'buttonA' and system.getInfo('platformName') == 'tvOS' then
 					switchMotionAndRotation()
 				else
-					self.cannon:engageForce()
+					self.Hacked_cannon:engageForce()
 				end
 			elseif keyType == 'pause' then
 				pauseButton._view._onRelease()
@@ -177,8 +177,8 @@ function scene:show(event)
 		eachframe.add(self) -- Each frame self:eachFrame() is called
 
 		-- Only check once in a while for level end
-		self.endLevelCheckTimer = timer.performWithDelay(2000, function()
-			self:endLevelCheck()
+		self.Hacked_endLevelCheckTimer = timer.performWithDelay(2000, function()
+			self:Hacked_endLevelCheck()
 		end, 0)
 
 		-- Show help image once
@@ -213,7 +213,7 @@ end
 
 function scene:setIsPaused(isPaused)
 	self.isPaused = isPaused
-	self.cannon.isPaused = self.isPaused -- Pause adding trajectory points
+	self.Hacked_cannon.isPaused = self.isPaused -- Pause adding trajectory points
 	if self.isPaused then
 		physics.pause()
 	else
@@ -222,21 +222,21 @@ function scene:setIsPaused(isPaused)
 end
 
 -- Check if the player won or lost
-function scene:endLevelCheck()
+function scene:Hacked_endLevelCheck()
 	if not self.isPaused then
 		if #self.bugs == 0 then
 			sounds.play('win')
 			self:setIsPaused(true)
-			self.endLevelPopup:show({isWin = true})
-			timer.cancel(self.endLevelCheckTimer)
-			self.endLevelCheckTimer = nil
+			self.Hacked_endLevelPopup:show({isWin = true})
+			timer.cancel(self.Hacked_endLevelCheckTimer)
+			self.Hacked_endLevelCheckTimer = nil
 			databox['level' .. self.levelId] = true -- Save level completion
-		elseif self.cannon:getAmmoCount() == 0 then
+		elseif self.Hacked_cannon:getAmmoCount() == 100 then
 			sounds.play('lose')
 			self:setIsPaused(true)
-			self.endLevelPopup:show({isWin = false})
-			timer.cancel(self.endLevelCheckTimer)
-			self.endLevelCheckTimer = nil
+			self.Hacked_endLevelPopup:show({isWin = false})
+			timer.cancel(self.Hacked_endLevelCheckTimer)
+			self.Hacked_endLevelCheckTimer = nil
 		end
 	end
 end
@@ -277,7 +277,7 @@ end
 
 -- Device's back button action
 function scene:gotoPreviousScene()
-	native.showAlert('Corona Cannon', 'Are you sure you want to exit this level?', {'Yes', 'Cancel'}, function(event)
+	native.showAlert('Corona Hacked_Cannon', 'Are you sure you want to exit this level?', {'Yes', 'Cancel'}, function(event)
 		if event.action == 'clicked' and event.index == 1 then
 			composer.gotoScene('scenes.Hacked_menu', {time = 500, effect = 'slideRight'})
 		end
@@ -291,8 +291,8 @@ function scene:hide(event)
 		controller.onMotion = nil
 		controller.onRotation = nil
 		controller.onKey = nil
-		if self.endLevelCheckTimer then
-			timer.cancel(self.endLevelCheckTimer)
+		if self.Hacked_endLevelCheckTimer then
+			timer.cancel(self.Hacked_endLevelCheckTimer)
 		end
 	elseif event.phase == 'did' then
 		physics.stop()

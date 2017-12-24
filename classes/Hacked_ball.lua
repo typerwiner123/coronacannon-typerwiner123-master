@@ -8,7 +8,7 @@ local _M = {}
 
 local newPuff = require('classes.puff').newPuff
 
-function _M.newBall(params)
+function _M.newHacked_Ball(params)
 	local Hacked_ball = display.newImageRect(params.g, 'images/ammo/' .. params.type .. '.png', 48, 48)
 	Hacked_ball.x, Hacked_ball.y = params.x, params.y
 	-- While the ball rests near the cannon, it's static
