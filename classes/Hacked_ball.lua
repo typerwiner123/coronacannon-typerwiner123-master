@@ -12,7 +12,7 @@ function _M.newHacked_Ball(params)
 	local Hacked_ball = display.newImageRect(params.g, 'images/ammo/' .. params.type .. '.png', 48, 48)
 	Hacked_ball.x, Hacked_ball.y = params.x, params.y
 	-- While the ball rests near the cannon, it's static
-	physics.addBody(Hacked_ball, 'static', {density = 0.5, friction = 0.5, bounce = 0.5, radius = Hacked_ball.width / 2})
+	physics.addBody(Hacked_ball, 'static', {density = 2, friction = 0.5, bounce = 0.5, radius = Hacked_ball.width / 2})
 	Hacked_ball.isBullet = true -- More accurate collision detection
 	Hacked_ball.angularDamping = 3 -- Prevent the ball from rolling for too long
 	Hacked_ball.type = params.type
